@@ -96,7 +96,7 @@ class App extends Component {
           isMouseDown={this.state.gridMouseDown}
           toggleCell={this.toggleCell}
         />
-        <Grid.Wrapper spacing="md" matrix gutter="md">
+        <Grid.Wrapper spacing="md" matrix gutter="md" className="u-push-bottom-md">
           <Grid.Item width="1/2">
             <Form.Select
               onChange={this.handleSelectIntervalChange}
@@ -145,6 +145,9 @@ class App extends Component {
             </Button>
           </Grid.Item>
         </Grid.Wrapper>
+        <p><strong>
+          <a href="https://github.com/rbrtsmith/game-of-life">GitHub Repo</a>
+        </strong></p>
       </div>
     );
   }
