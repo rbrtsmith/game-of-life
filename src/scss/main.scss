@@ -1,0 +1,66 @@
+@import 'settings';
+@import 'tools';
+@import 'resets';
+@import 'base';
+@import 'objects';
+@import 'components';
+@import 'utilities';
+
+
+html,
+body,
+#root,
+.App {
+  height: 100%;
+}
+
+body {
+  text-align: center;
+}
+
+.App {
+  padding: 0.75rem;
+}
+
+.grid {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: $nb-spacing-unit;
+  border: 1px solid $nb-color-grey-dark;
+  font-size: 0;
+}
+
+.grid__row {
+  display: block;
+}
+
+.grid__cell {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 0;
+  padding-bottom: 50%;
+  border: 1px solid $nb-color-grey-dark;
+}
+
+.grid__cell-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  transform: scale(0);
+  transition: background-color 0.4s, transform 0.4s;
+}
+
+.grid__cell--populated .grid__cell-overlay {
+  transform: scale(1);
+  background-color: $nb-color-alpha;
+}
+
+.grid__cell--perished .grid__cell-overlay {
+  transform: scale(1);
+  background-color: $nb-color-error;
+}
