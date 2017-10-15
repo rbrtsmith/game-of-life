@@ -1,4 +1,5 @@
-import { twoOrThreeNeighbours, threeNeighbours, nextTick } from '../'
+import nextTick from '../'
+import { twoOrThreeNeighbours, threeNeighbours } from '../quantityOfNeighbours'
 
 const grid = [
   [{ val: -1 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }],
@@ -46,7 +47,27 @@ describe('next tick', () => {
       [{ val: 0 }, { val: -1 }, { val: 1 }, { val: 1 }, { val: 0 }, { val: 0 }],
       [{ val: 0 }, { val: 0 }, { val: 1 }, { val: 0 }, { val: 0 }, { val: 0 }]
     ]
-
     expect(nextTick(grid)).toEqual(expected)
+  })
+
+  it('removes dead cells', () => {
+    const input = [
+      [{ val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }],
+      [{ val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }],
+      [{ val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }],
+      [{ val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }],
+      [{ val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }],
+      [{ val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }, { val: -1 }]
+    ]
+
+    const expected = [
+      [{ val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }],
+      [{ val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }],
+      [{ val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }],
+      [{ val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }],
+      [{ val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }],
+      [{ val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }, { val: 0 }]
+    ]
+    expect(nextTick(input)).toEqual(expected)
   })
 })

@@ -31,8 +31,8 @@ class Grid extends Component {
             >
               {
                 row.map((cell, cellIndex) =>
-                  <div
-                    onMouseDown={handleClick.bind('', rowIndex, cellIndex)}
+                  <button
+                    onClick={handleClick.bind('', rowIndex, cellIndex)}
                     onMouseEnter={handleMouseEnter.bind('', rowIndex, cellIndex)}
                     key={cell.id}
                     className={`grid__cell ${buildClassName(cell.val)}`}
@@ -47,7 +47,7 @@ class Grid extends Component {
                         transition: `background-color ${transitionDuration}s, transform ${transitionDuration}s`
                       }}
                     />
-                  </div>
+                  </button>
                 )
               }
             </div>

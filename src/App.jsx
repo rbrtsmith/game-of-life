@@ -3,7 +3,7 @@ import { Button, Form, Grid } from 'nebula-react'
 
 import buildGrid from './buildGrid'
 import Game from './Grid'
-import { nextTick } from './algorithm'
+import nextTick from './algorithm'
 import './scss/main.scss'
 
 class App extends Component {
