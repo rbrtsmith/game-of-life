@@ -59,18 +59,18 @@ class App extends PureComponent {
   }
 
   toggleCell = (rowIndex, cellIndex) => {
-    this.setState(state => ({
+    this.setState(({ grid }) => ({
       grid: [
-        ...state.grid.slice(0, rowIndex),
+        ...grid.slice(0, rowIndex),
         [
-          ...state.grid[rowIndex].slice(0, cellIndex),
+          ...grid[rowIndex].slice(0, cellIndex),
           {
-            ...state.grid[rowIndex][cellIndex],
-            val: state.grid[rowIndex][cellIndex].val ? 0 : 1
+            ...grid[rowIndex][cellIndex],
+            val: grid[rowIndex][cellIndex].val ? 0 : 1
           },
-          ...state.grid[rowIndex].slice(cellIndex + 1)
+          ...grid[rowIndex].slice(cellIndex + 1)
         ],
-        ...state.grid.slice(rowIndex + 1)
+        ...grid.slice(rowIndex + 1)
       ]
     }))
   }
