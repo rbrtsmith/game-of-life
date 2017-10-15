@@ -93,7 +93,11 @@ class App extends PureComponent {
       handleStartStopButtonClick
     } = this
     return (
-      <div className="App" onMouseUp={this.onMouseUp} style={{ maxWidth: '500px', margin: '0 auto' }}>
+      <div
+        className="App"
+        onMouseUp={this.onMouseUp}
+        style={{ maxWidth: '500px', margin: '0 auto' }}
+      >
         <h1>Game of Life</h1>
         <p>Fill some squares then hit Start!</p>
         <Game
@@ -110,9 +114,13 @@ class App extends PureComponent {
             ...this.state
           }}
         />
-        <p><strong>
-          <a href="https://github.com/rbrtsmith/game-of-life">GitHub Repo</a>
-        </strong></p>
+        <p>
+          <strong>
+            <a href="https://github.com/rbrtsmith/game-of-life">
+              GitHub Repo
+            </a>
+          </strong>
+        </p>
       </div>
     );
   }
