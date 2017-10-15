@@ -43,7 +43,6 @@ const getNorthWestCell = ([y, x], grid) =>
     ? null
     : grid[y - 1][x - 1].val
 
-
 const getNeighbouringCells = {
   getNorthCell,
   getNorthEastCell,
