@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Button, Form, Grid } from 'nebula-react'
 
 import buildGrid from './buildGrid'
-import Game from './Grid'
+import Game from './Game'
 import nextTick from './algorithm'
 import './scss/main.scss'
 
-class App extends Component {
+class App extends PureComponent {
   state = {
     gridSize: 15,
     grid: null,
