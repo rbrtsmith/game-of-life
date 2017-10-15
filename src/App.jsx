@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
-import { Button, Form, Grid } from 'nebula-react'
 
+import Settings from './Settings'
 import buildGrid from './buildGrid'
 import Game from './Game'
 import nextTick from './algorithm'
@@ -40,7 +40,7 @@ class App extends PureComponent {
     }))
   }
 
-  handleButtonClick = () => {
+  handleStartStopButtonClick = () => {
     this.setState(state => ({
       running: !state.running
     }))
@@ -84,67 +84,32 @@ class App extends PureComponent {
   }
 
   render() {
+    const { gridMouseDown } = this.state
+    const {
+      onGridMouseDown,
+      toggleCell,
+      handleSelectIntervalChange,
+      handleSelectTransitionDurationChange,
+      handleStartStopButtonClick
+    } = this
     return (
       <div className="App" onMouseUp={this.onMouseUp} style={{ maxWidth: '500px', margin: '0 auto' }}>
         <h1>Game of Life</h1>
         <p>Fill some squares then hit Start!</p>
         <Game
-          grid={this.state.grid}
-          gridSize={this.state.gridSize}
-          transitionDuration={this.state.transitionDuration}
-          onMouseDown={this.onGridMouseDown}
-          isMouseDown={this.state.gridMouseDown}
-          toggleCell={this.toggleCell}
+          {...{ ...this.state }}
+          onMouseDown={onGridMouseDown}
+          isMouseDown={gridMouseDown}
+          toggleCell={toggleCell}
         />
-        <Grid.Wrapper spacing="md" matrix gutter="md" className="u-push-bottom-md">
-          <Grid.Item width="1/2">
-            <Form.Select
-              onChange={this.handleSelectIntervalChange}
-              small
-              value={this.state.tickInterval}
-            >
-              <option value={100}>
-                Tick Interval: 100ms
-              </option>
-              <option value={200}>
-                Tick Interval: 200ms
-              </option>
-              <option value={500}>
-                Tick Interval: 500ms
-              </option>
-              <option value={1000}>
-                Tick Interval: 1s
-              </option>
-            </Form.Select>
-          </Grid.Item>
-          <Grid.Item width="1/2">
-            <Form.Select
-              onChange={this.handleSelectTransitionDurationChange}
-              small
-              value={this.state.transitionDuration}
-            >
-              <option value={0}>
-                Transition: 0ms
-              </option>
-              <option value={0.1}>
-                Transition: 100ms
-              </option>
-              <option value={0.2}>
-                Transition: 200ms
-              </option>
-              <option value={0.4}>
-                Transition: 400ms
-              </option>
-            </Form.Select>
-          </Grid.Item>
-          <Grid.Item>
-            <Button size="lg" fullWidth theme="alpha" onClick={this.handleButtonClick}>
-              {
-                this.state.running ? 'Stop' : 'Start'
-              }
-            </Button>
-          </Grid.Item>
-        </Grid.Wrapper>
+        <Settings
+          {...{
+            handleSelectIntervalChange,
+            handleSelectTransitionDurationChange,
+            handleStartStopButtonClick,
+            ...this.state
+          }}
+        />
         <p><strong>
           <a href="https://github.com/rbrtsmith/game-of-life">GitHub Repo</a>
         </strong></p>
