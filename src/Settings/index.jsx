@@ -1,12 +1,13 @@
 import React from 'react'
+import T from 'prop-types'
 import { Grid, Form, Button } from 'nebula-react'
 
 const Settings = ({
   handleSelectIntervalChange,
-  tickInterval,
   handleSelectTransitionDurationChange,
-  transitionDuration,
   handleStartStopButtonClick,
+  tickInterval,
+  transitionDuration,
   running
 }) => (
   <Grid.Wrapper spacing="md" matrix gutter="md" className="u-push-bottom-md">
@@ -18,16 +19,16 @@ const Settings = ({
       >
         <option value={100}>
           Tick Interval: 100ms
-              </option>
+        </option>
         <option value={200}>
           Tick Interval: 200ms
-              </option>
+        </option>
         <option value={500}>
           Tick Interval: 500ms
-              </option>
+        </option>
         <option value={1000}>
           Tick Interval: 1s
-              </option>
+        </option>
       </Form.Select>
     </Grid.Item>
     <Grid.Item width="1/2">
@@ -38,16 +39,16 @@ const Settings = ({
       >
         <option value={0}>
           Transition: 0ms
-              </option>
+        </option>
         <option value={0.1}>
           Transition: 100ms
-              </option>
+        </option>
         <option value={0.2}>
           Transition: 200ms
-              </option>
+        </option>
         <option value={0.4}>
           Transition: 400ms
-              </option>
+        </option>
       </Form.Select>
     </Grid.Item>
     <Grid.Item>
@@ -59,5 +60,14 @@ const Settings = ({
     </Grid.Item>
   </Grid.Wrapper>
 )
+
+Settings.propTypes = {
+  handleSelectIntervalChange: T.func.isRequired,
+  handleSelectTransitionDurationChange: T.func.isRequired,
+  handleStartStopButtonClick: T.func.isRequired,
+  tickInterval: T.number.isRequired,
+  transitionDuration: T.number.isRequired,
+  running: T.bool.isRequired
+}
 
 export default Settings
