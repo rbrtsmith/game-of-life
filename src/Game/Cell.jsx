@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'prop-types'
 
 const buildClassName = value => {
   if (value === -1) {
@@ -15,12 +16,11 @@ const Cell = ({
   cellIndex,
   gridSize,
   transitionDuration,
-  cell: { id, val }
+  cell: { val }
 }) => (
   <button
     onClick={handleClick.bind('', rowIndex, cellIndex)}
     onMouseEnter={handleMouseEnter.bind('', rowIndex, cellIndex)}
-    key={id}
     className={`grid__cell ${buildClassName(val)}`}
     style={{
       width: `${100 / gridSize}%`,
@@ -35,5 +35,17 @@ const Cell = ({
     />
   </button>
 )
+
+Cell.propTypes = {
+  handleClick: T.func.isRequired,
+  handleMouseEnter: T.func.isRequired,
+  rowIndex: T.number.isRequired,
+  cellIndex: T.number.isRequired,
+  gridSize: T.number.isRequired,
+  transitionDuration: T.number.isRequired,
+  cell: T.shape({
+    val: T.oneOf([-1, 0, 1]).isRequired
+  }).isRequired
+}
 
 export default Cell
