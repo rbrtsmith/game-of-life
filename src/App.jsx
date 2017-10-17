@@ -4,6 +4,7 @@ import Settings from './Settings'
 import buildGrid from './buildGrid'
 import Game from './Game'
 import nextTick from './algorithm'
+import toggleGridCell from './utilities/toggleGridCell'
 import './scss/main.scss'
 
 class App extends PureComponent {
@@ -25,63 +26,40 @@ class App extends PureComponent {
   interval = null
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.running !== this.state.running) {
-      if (this.state.running) {
-        this.interval = setInterval(this.nextTick, this.state.tickInterval)
-      } else {
-        clearInterval(this.interval)
-      }
+    if (prevState.running === this.state.running) { 
+      return null
+    }
+
+    if (this.state.running) {
+      this.interval = setInterval(this.nextTick, this.state.tickInterval)
+    } else {
+      clearInterval(this.interval)
     }
   }
 
-  nextTick = () => {
-    this.setState(({ grid }) => ({
-      grid: nextTick(grid)
-    }))
-  }
+  nextTick = () =>
+    this.setState(({ grid }) => ({ grid: nextTick(grid) }))
 
-  handleStartStopButtonClick = () => {
-    this.setState(state => ({
-      running: !state.running
-    }))
-  }
+  handleStartStopButtonClick = () =>
+    this.setState(state => ({ running: !state.running }))
 
-  onGridMouseDown = () => {
-    this.setState(() => ({
-      gridMouseDown: true
-    }))
-  }
+  onGridMouseDown = () =>
+    this.setState(() => ({ gridMouseDown: true }))
 
-  onMouseUp = () => {
-    this.setState(() => ({
-      gridMouseDown: false
-    }))
-  }
+  onMouseUp = () =>
+    this.setState(() => ({ gridMouseDown: false }))
 
-  toggleCell = (rowIndex, cellIndex) => {
-    this.setState(({ grid }) => ({
-      grid: [
-        ...grid.slice(0, rowIndex),
-        [
-          ...grid[rowIndex].slice(0, cellIndex),
-          {
-            ...grid[rowIndex][cellIndex],
-            val: grid[rowIndex][cellIndex].val ? 0 : 1
-          },
-          ...grid[rowIndex].slice(cellIndex + 1)
-        ],
-        ...grid.slice(rowIndex + 1)
-      ]
-    }))
-  }
+  toggleCell = (rowIndex, cellIndex) =>
+    this.setState(({ grid }) =>
+      ({ grid: toggleGridCell(rowIndex, cellIndex)(grid)}))
 
-  handleSelectIntervalChange = ({ target: { value } }) => {
-    this.setState(() => ({ tickInterval: value, running: false }))
-  }
+  handleSelectIntervalChange = ({ target: { value } }) =>
+    this.setState(() =>
+      ({ tickInterval: parseInt(value, 10), running: false }))
 
-  handleSelectTransitionDurationChange = ({ target: { value } }) => {
-    this.setState(() => ({ transitionDuration: value }))
-  }
+  handleSelectTransitionDurationChange = ({ target: { value } }) =>
+    this.setState(() =>
+      ({ transitionDuration: parseInt(value, 10) }))
 
   render() {
     const { gridMouseDown } = this.state
